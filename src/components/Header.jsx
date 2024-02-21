@@ -1,13 +1,16 @@
-import { useState } from "react";
-//assets
+import { useContext } from "react";
+//Assets
 import logo from "../assets/logo.jpg";
-//components
+//Components
 import Button from "./UI/Button.jsx";
+//Context
+import CartContext from "../store/CartContext.jsx";
 
-export default function Header({ cartItemsCount }) {
-  const [cartItems, setCartItems] = useState(
-    cartItemsCount ? cartItemsCount : 0
-  );
+export default function Header() {
+  const cartContext = useContext(CartContext);
+  const totalItems = cartContext.items.reduce((acc, item) => {
+    return acc + item.amount;
+  }, 0);
   return (
     <header id="main-header">
       <div id="title">
@@ -15,7 +18,7 @@ export default function Header({ cartItemsCount }) {
         <h1>My Food Order App</h1>
       </div>
       <nav>
-        <Button textOnly> My Cart ({cartItems}) </Button>
+        <Button textOnly> My Cart ({totalItems}) </Button>
       </nav>
     </header>
   );
