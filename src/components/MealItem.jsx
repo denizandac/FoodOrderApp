@@ -1,10 +1,17 @@
-//utils
+import { useContext } from "react";
+//Utils
 import { formatter } from "../util/formatter.js";
-
-// Component
+// Components
 import Button from "./UI/Button.jsx";
+// Context
+import CartContext from "../store/CartContext.jsx";
 
 export default function MealItem({ meal }) {
+  const cartContext = useContext(CartContext);
+  function handleAddItemToCart() {
+    cartContext.addItem(meal, 1);
+  }
+
   return (
     <li className="meal-item">
       <article>
@@ -19,7 +26,7 @@ export default function MealItem({ meal }) {
           <p className="meal-item-price">{formatter.format(meal.price)}</p>
         </div>
         <p className="meal-item-actions">
-          <Button>Add to Cart</Button>
+          <Button onClick={handleAddItemToCart}>Add to Cart</Button>
         </p>
       </article>
     </li>
