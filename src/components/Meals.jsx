@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 //Components
 import MealItem from "./MealItem.jsx";
 
